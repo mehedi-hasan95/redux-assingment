@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import addBlogsData from "../../Redux/thunk/blogs/addBlogsData";
 
 const Write = () => {
+    const dispatch = useDispatch();
     const [inputCats, setInputCats] = useState([{ cat: "" }]);
     const addCats = (index, event) => {
         const values = [...inputCats];
@@ -46,7 +49,7 @@ const Write = () => {
                         cat: inputCats,
                         img: result.data.url,
                     };
-                    console.log(data);
+                    dispatch(addBlogsData(data));
                 }
             })
             .catch((error) => {
@@ -71,37 +74,37 @@ const Write = () => {
                     />
                 </div>
                 <div className="w-full space-y-1 flex flex-wrap">
-                    <div>
-                        {inputCats.map((event, index) => (
-                            <div key={index}>
-                                <label
-                                    htmlFor="cat"
-                                    className="block text-sm font-medium"
-                                >
-                                    Category
-                                </label>
-                                <div className="flex items-center gap-5">
-                                    <input
-                                        type="text"
-                                        name="cat"
-                                        id="cat"
-                                        className="border border-purple-700 px-3 py-2 w-full"
-                                        onChange={(event) =>
-                                            addCats(index, event)
-                                        }
-                                    />
+                    {inputCats.map((event, index) => (
+                        <div key={index}>
+                            <label
+                                htmlFor="cat"
+                                className="block text-sm font-medium"
+                            >
+                                Category
+                            </label>
+                            <div className="flex items-center gap-5 mr-5">
+                                <input
+                                    type="text"
+                                    name="cat"
+                                    id="cat"
+                                    className="border border-purple-700 px-3 py-2 w-full"
+                                    onChange={(event) => addCats(index, event)}
+                                />
+                                {inputCats.length === 1 ? (
+                                    ""
+                                ) : (
                                     <AiOutlineMinus
                                         onClick={() => removeCatFilds(index)}
                                         className="text-2xl cursor-pointer"
                                     />
-                                    <AiOutlinePlus
-                                        onClick={addCatFilds}
-                                        className="text-2xl cursor-pointer"
-                                    />
-                                </div>
+                                )}
+                                <AiOutlinePlus
+                                    onClick={addCatFilds}
+                                    className="text-2xl cursor-pointer"
+                                />
                             </div>
-                        ))}
-                    </div>
+                        </div>
+                    ))}
                 </div>
                 <div className="w-full space-y-1">
                     <label htmlFor="desc" className="block text-sm font-medium">
