@@ -6,7 +6,6 @@ import fetchBlogs from "../../Redux/thunk/blogs/fetchBlogs";
 const Home = () => {
     const dispatch = useDispatch();
     const blogs = useSelector((blog) => blog.blog.blogs);
-    console.log(blogs);
     useEffect(() => {
         dispatch(fetchBlogs());
     }, []);
@@ -23,7 +22,7 @@ const Home = () => {
                 </div>
                 <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3">
                     {blogs.map((blog) => (
-                        <BlogCard key={blog._id}></BlogCard>
+                        <BlogCard key={blog._id} blog={blog}></BlogCard>
                     ))}
                 </div>
             </div>
