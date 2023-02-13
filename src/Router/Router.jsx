@@ -15,7 +15,9 @@ const router = createBrowserRouter([
                 path: "blog/:id",
                 element: <SinglePage />,
                 loader: ({ params }) =>
-                    fetch(`http://localhost:5000/blog/${params.id}`),
+                    fetch(
+                        `https://redux-server-eosin.vercel.app/blog/${params.id}`
+                    ),
             },
         ],
     },

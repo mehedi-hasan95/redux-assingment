@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import { useDispatch } from "react-redux";
@@ -7,6 +7,7 @@ import removeBlogsData from "../../Redux/thunk/blogs/removeBlogsData";
 import updateBlogsData from "../../Redux/thunk/blogs/updateBlogsData";
 
 const SinglePage = () => {
+    const navigate = useNavigate();
     const blogs = useLoaderData();
     const { _id, img, title, desc, cat } = blogs;
     //Redux
@@ -33,7 +34,9 @@ const SinglePage = () => {
                 />
                 <AiFillDelete
                     className="cursor-pointer"
-                    onClick={() => dispatch(removeBlogsData(_id))}
+                    onClick={() =>
+                        dispatch(removeBlogsData(_id), navigate("/"))
+                    }
                 />
             </div>
             {updateMode ? (
@@ -81,7 +84,9 @@ const SinglePage = () => {
                         Close
                     </button>
                     <button
-                        onClick={() => dispatch(updateBlogsData(_id, data))}
+                        onClick={() =>
+                            dispatch(updateBlogsData(_id, data), navigate(`/`))
+                        }
                         className="bg-purple-400 px-4 py-2 rounded-md"
                     >
                         Update

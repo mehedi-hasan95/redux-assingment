@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import addBlogsData from "../../Redux/thunk/blogs/addBlogsData";
 
 const Write = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [inputCats, setInputCats] = useState([{ cat: "" }]);
     const addCats = (index, event) => {
@@ -49,7 +51,7 @@ const Write = () => {
                         cat: inputCats,
                         img: result.data.url,
                     };
-                    dispatch(addBlogsData(data));
+                    dispatch(addBlogsData(data), navigate("/"));
                 }
             })
             .catch((error) => {

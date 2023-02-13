@@ -28,6 +28,7 @@ const BlogCard = ({ blog }) => {
                 >
                     {title}
                 </Link>
+                <p>{desc?.length > 200 ? desc.substring(0, 300) : desc}</p>
             </div>
         </article>
     );
