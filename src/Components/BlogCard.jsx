@@ -2,9 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const BlogCard = ({ blog }) => {
-    console.log(blog);
     const { img, _id, title, desc, cat } = blog;
-    console.log(cat);
     return (
         <article className="flex flex-col dark:bg-gray-900 bg-gray-300">
             <img
@@ -13,13 +11,17 @@ const BlogCard = ({ blog }) => {
                 src={img}
             />
             <div className="flex flex-col flex-1 p-6">
-                <Link
-                    rel="noopener noreferrer"
-                    to="#"
-                    className="text-xs tracking-wider uppercase hover:underline dark:text-violet-400"
-                >
-                    Convenire
-                </Link>
+                <h3 className="py-4">
+                    {cat?.map((categories, index) => (
+                        <Link
+                            to=""
+                            key={index}
+                            className="bg-gray-500 px-3 py-2 mr-5 text-white font-bold"
+                        >
+                            {categories.cat}
+                        </Link>
+                    ))}
+                </h3>
                 <Link
                     to={`/blog/${_id}`}
                     className="flex-1 py-2 text-lg font-semibold leading-snug"
